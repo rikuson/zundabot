@@ -6,9 +6,22 @@ pub fn run() -> Result<(), Box<dyn Error>> {
     // Initialize GStreamer
     gst::init().unwrap();
 
+    // Create the elements
+    let source = gst::ElementFactory::make("audiotestsrc")
+        .name("source")
+        .build()
+        .expect("Could not create source element.");
+    let sink = gst::ElementFactory::make("webrtcsink")
+        .name("sink")
+        .build()
+        .expect("Could not create sink element");
+
+    // Create the empty pipeline
+    let pipeline = gst::Pipeline::with_name("test-pipeline");
+
     // Build the pipeline
-    let room_id = "1234";
-    let pipeline = gst::parse::launch(&format!("videotestsrc ! janusvrwebrtcsink signaller::room-id={room_id}")).unwrap();
+    pipeline.add_many([&source, &sink]).unwrap();
+    source.link(&sink).expect("Elements could not be linked.");
 
     // Start playing
     pipeline

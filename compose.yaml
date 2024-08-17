@@ -1,16 +1,15 @@
 version: "3"
 
 services:
-  nginx:
-    build: nginx
-    depends_on:
-      - janus
-    ports:
-      - 80:80
-  janus:
-    image: saverops/janus-gateway
-    build: janus-gateway
+  signaling:
+    tty: true
+    build: gstreamer
+    entrypoint:
+      - cargo
+      - run
+      - --bin
+      - gst-webrtc-signalling-server
     environment:
-      - TZ=Asia/Tokyo
+      - GST_DEBUG=3
     ports:
-      - 8188:8188
+      - 8443:8443
