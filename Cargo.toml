@@ -5,3 +5,6 @@ edition = "2021"
 
 [dependencies]
 gstreamer = "0.23.0"
+gstreamer-app = "0.23.0"
+gstreamer-audio = "0.23.0"
+vvcore = "0.0.2"
