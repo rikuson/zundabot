@@ -4,7 +4,7 @@ use gst::prelude::*;
 use vvcore::*;
 
 const CHUNK_SIZE: usize = 1024; // Amount of bytes we are sending in each buffer
-const SAMPLE_RATE: u32 = 44_100; // Samples per second we are sending
+const SAMPLE_RATE: u32 = 24_000; // Samples per second we are sending
 
 pub fn run() -> Result<(), Box<dyn Error>> {
     // Initialize GStreamer
