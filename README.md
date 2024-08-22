@@ -22,11 +22,10 @@ chmod +x download-osx-arm64
 ./download-osx-arm64
 mv voicevox_core/* .
 rm -r voicevox_core download-osx-arm64
+cd ..
+sudo chmod o-w lib
 ```
-
-
 
 ```
 "open_jtalk_dic_utf_8-1.11" -> /usr/local/lib/open_jtalk_dic_utf_8-1.11
 ```
-
