@@ -11,10 +11,11 @@ pub fn run() -> Result<(), Box<dyn Error>> {
     gst::init().unwrap();
 
     let dir = std::ffi::CString::new("/usr/local/lib/open_jtalk_dic_utf_8-1.11").unwrap();
-    let vvc = VoicevoxCore::new_from_options(AccelerationMode::Auto, 0, true, dir.as_c_str()).unwrap();
+    let vvc = VoicevoxCore::new_from_options(AccelerationMode::Auto, 0, false, dir.as_c_str()).unwrap();
 
     let text: &str = "こんにちは";
     let speaker: u32 = 1;
+    vvc.load_model(speaker).unwrap();
     let wav = vvc.tts_simple(text, speaker).unwrap();
 
     let info = gstreamer_audio::AudioInfo::builder(gstreamer_audio::AudioFormat::S16le, SAMPLE_RATE, 1)
